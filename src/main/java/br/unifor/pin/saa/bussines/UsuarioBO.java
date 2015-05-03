@@ -21,9 +21,7 @@ public class UsuarioBO {
 	@Autowired
 	private UsuarioDAO usuarioDAO;
 	
-	public void teste(){
-		//nao faz nada
-	}
+	
 
 	public void salvar(Usuarios usuario) {
 		loggerInit("salvar");
