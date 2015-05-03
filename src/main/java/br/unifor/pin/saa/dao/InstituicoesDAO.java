@@ -1,8 +1,13 @@
 package br.unifor.pin.saa.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -39,6 +44,17 @@ public class InstituicoesDAO {
 		query.setParameter("nome", nome);
 		
 		return (Instituicoes) query.getSingleResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Instituicoes> listarPorNome(String nome) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Instituicoes> criteriaQuery = criteriaBuilder.createQuery(Instituicoes.class);
+		Root<Instituicoes> instituicoes = criteriaQuery.from(Instituicoes.class);
+		criteriaQuery.where(criteriaBuilder.like(instituicoes.<String>get("nome"), "%"+nome+"%"));
+		
+		Query query = entityManager.createQuery(criteriaQuery);
+		return query.getResultList();
 	}
 
 }
