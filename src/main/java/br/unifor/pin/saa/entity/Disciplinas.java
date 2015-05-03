@@ -28,7 +28,7 @@ public class Disciplinas implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="instituicao_id")
-	private Long instituicao;
+	private Instituicoes instituicao;
 	
 	@ManyToOne
 	@JoinColumn(name="professor_id")
@@ -50,11 +50,11 @@ public class Disciplinas implements Serializable {
 		this.nome = nome;
 	}
 
-	public Long getInstituicao() {
+	public Instituicoes getInstituicao() {
 		return instituicao;
 	}
 
-	public void setInstituicao(Long instituicao) {
+	public void setInstituicao(Instituicoes instituicao) {
 		this.instituicao = instituicao;
 	}
 
